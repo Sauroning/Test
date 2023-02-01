@@ -11,15 +11,20 @@ public class Util {
 
     private static Connection connection;
 
-    public Util() {
+    public static Connection getConnection() {
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static Connection getConnection() {
-        return connection;
+    public static void connectionClose() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
